@@ -1,7 +1,10 @@
 require('dotenv').config();
+
+//Import Mongoose and connect to MongoDB with URI store in secret
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
+//Create Schema then Model
 const personSchema = new mongoose.Schema({
   name: {type: String, required: true},
   age: Number,
@@ -45,6 +48,7 @@ const findOneByFood = (food, done) => {
 };
 
 const findPersonById = (personId, done) => {
+  //findById equals to find({_id: personId})
   Person.findById(personId, (err, doc) => {
     if (err) return done(err);
     done(null, doc);
